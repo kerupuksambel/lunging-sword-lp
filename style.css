@@ -1,0 +1,241 @@
+/* Lunging Sword — privacy & support pages.
+   Direction: the game's printed-manual insert. A parchment sheet laid on the
+   dungeon's rock, VT323 for headings (the in-game face, self-hosted so these
+   pages make no third-party requests), a book serif for reading.
+   Palette is design/DESIGN.md verbatim: parchment #F2EAD9, vellum #FAF4E6,
+   ink #2A231D, umber #6F6355, rule #DCD1BB, rock #5C5248, slab-deep #322C25,
+   bronze #825A33. Radius: none — everything is cut square, like the pixel art.
+   Signature: the 64px app icon drawn pixel-crisp in a heavy slab frame. */
+
+@font-face {
+  font-family: "VT323";
+  src: url("fonts/VT323.ttf") format("truetype");
+  font-display: swap;
+}
+
+:root {
+  --backdrop: #5C5248;
+  --backdrop-deep: #322C25;
+  --paper: #F2EAD9;
+  --paper-raised: #FAF4E6;
+  --ink: #2A231D;
+  --muted: #6F6355;
+  --rule: #DCD1BB;
+  --rule-strong: #B9AC92;
+  --accent: #825A33;
+  --focus: #825A33;
+  --pixel: "VT323", "SF Mono", ui-monospace, monospace;
+  --read: "Iowan Old Style", "Palatino Linotype", Palatino, Charter, Georgia, serif;
+  --u: 4px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --backdrop: #1E1A16;
+    --backdrop-deep: #0F0D0B;
+    --paper: #322C25;
+    --paper-raised: #3B342C;
+    --ink: #F2EAD9;
+    --muted: #B9AC92;
+    --rule: #453D34;
+    --rule-strong: #5C5248;
+    --accent: #C9A472;
+    --focus: #C9A472;
+  }
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background-color: var(--backdrop);
+  /* a coarse rubble texture: two offset dot grids in the backdrop's deep tone */
+  background-image:
+    radial-gradient(var(--backdrop-deep) 1.5px, transparent 1.6px),
+    radial-gradient(var(--backdrop-deep) 1px, transparent 1.1px);
+  background-size: 22px 22px, 14px 14px;
+  background-position: 0 0, 7px 11px;
+  color: var(--ink);
+  font: 18px/1.6 var(--read);
+  padding: calc(var(--u) * 8) 16px calc(var(--u) * 12);
+}
+
+.sheet {
+  max-width: 680px;
+  margin: 0 auto;
+  background: var(--paper);
+  border: var(--u) solid var(--backdrop-deep);
+  box-shadow: calc(var(--u) * 2) calc(var(--u) * 2) 0 var(--backdrop-deep);
+  padding: calc(var(--u) * 8) calc(var(--u) * 9) calc(var(--u) * 10);
+}
+
+/* --- masthead: icon left, title right, a hard rule under both --- */
+.masthead {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: calc(var(--u) * 5);
+  align-items: end;
+  padding-bottom: calc(var(--u) * 5);
+  border-bottom: 3px solid var(--ink);
+  margin-bottom: calc(var(--u) * 7);
+}
+
+.masthead img {
+  width: 96px;
+  height: 96px;
+  image-rendering: pixelated;
+  border: var(--u) solid var(--backdrop-deep);
+  display: block;
+}
+
+.masthead .app {
+  font-family: var(--pixel);
+  font-size: 22px;
+  line-height: 1;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+  margin: 0 0 var(--u);
+}
+
+.masthead h1 {
+  font-family: var(--pixel);
+  font-weight: 400;
+  font-size: 52px;
+  line-height: 0.95;
+  margin: 0;
+}
+
+.stamp {
+  font-family: var(--pixel);
+  font-size: 20px;
+  color: var(--muted);
+  margin: calc(var(--u) * 2) 0 0;
+}
+
+/* --- body --- */
+.lede {
+  font-size: 21px;
+  line-height: 1.5;
+  margin: 0 0 calc(var(--u) * 8);
+}
+
+h2 {
+  font-family: var(--pixel);
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 1;
+  margin: calc(var(--u) * 10) 0 calc(var(--u) * 3);
+  display: flex;
+  gap: calc(var(--u) * 3);
+  align-items: baseline;
+}
+
+/* section numbers in the margin voice, like a manual's chapter marks */
+h2 .no {
+  color: var(--accent);
+  font-size: 24px;
+  min-width: 2ch;
+}
+
+h3 {
+  font-family: var(--read);
+  font-size: 18px;
+  font-weight: 700;
+  margin: calc(var(--u) * 6) 0 var(--u);
+}
+
+p, ul, ol { margin: 0 0 calc(var(--u) * 4); }
+
+ul, ol { padding-left: 1.3em; }
+li { margin-bottom: calc(var(--u) * 1.5); }
+li::marker { color: var(--accent); }
+
+strong { font-weight: 700; }
+
+a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+a:hover { text-decoration-thickness: 4px; }
+a:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+
+/* a ledger of what the game keeps: term left, meaning right, hairlines between */
+.ledger {
+  margin: calc(var(--u) * 4) 0 calc(var(--u) * 6);
+  border-top: 1.5px solid var(--rule-strong);
+}
+.ledger div {
+  display: grid;
+  grid-template-columns: 11rem 1fr;
+  gap: calc(var(--u) * 4);
+  padding: calc(var(--u) * 3) 0;
+  border-bottom: 1.5px solid var(--rule);
+}
+.ledger dt {
+  font-family: var(--pixel);
+  font-size: 22px;
+  line-height: 1.2;
+}
+.ledger dd { margin: 0; }
+
+/* the short "never" list on the privacy page — plain, heavy, no decoration */
+.never {
+  list-style: none;
+  padding: calc(var(--u) * 4) calc(var(--u) * 5);
+  background: var(--paper-raised);
+  border-left: var(--u) solid var(--ink);
+}
+.never li { margin: 0; padding: var(--u) 0; }
+
+kbd {
+  font-family: var(--pixel);
+  font-size: 20px;
+  padding: 0 6px;
+  border: 1.5px solid var(--rule-strong);
+  border-bottom-width: 3px;
+  background: var(--paper-raised);
+}
+
+.contact {
+  margin-top: calc(var(--u) * 10);
+  padding-top: calc(var(--u) * 5);
+  border-top: 3px solid var(--ink);
+}
+
+footer {
+  max-width: 680px;
+  margin: calc(var(--u) * 5) auto 0;
+  font-family: var(--pixel);
+  font-size: 20px;
+  color: #DCD1BB;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+footer a { color: #F2EAD9; }
+
+/* placeholders the developer must replace before publishing */
+.fill {
+  background: #C99938;
+  color: #2A231D;
+  padding: 0 4px;
+  font-family: var(--pixel);
+}
+
+@media (max-width: 560px) {
+  body { font-size: 17px; padding-top: calc(var(--u) * 4); }
+  .sheet { padding: calc(var(--u) * 6) calc(var(--u) * 5) calc(var(--u) * 8); }
+  .masthead { grid-template-columns: 1fr; gap: calc(var(--u) * 3); }
+  .masthead img { width: 64px; height: 64px; }
+  .masthead h1 { font-size: 44px; }
+  .ledger div { grid-template-columns: 1fr; gap: var(--u); }
+}
