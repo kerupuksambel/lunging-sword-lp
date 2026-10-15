@@ -223,14 +223,6 @@ footer {
 }
 footer a { color: #F2EAD9; }
 
-/* placeholders the developer must replace before publishing */
-.fill {
-  background: #C99938;
-  color: #2A231D;
-  padding: 0 4px;
-  font-family: var(--pixel);
-}
-
 @media (max-width: 560px) {
   body { font-size: 17px; padding-top: calc(var(--u) * 4); }
   .sheet { padding: calc(var(--u) * 6) calc(var(--u) * 5) calc(var(--u) * 8); }
