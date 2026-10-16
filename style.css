@@ -231,3 +231,157 @@ footer a { color: #F2EAD9; }
   .masthead h1 { font-size: 44px; }
   .ledger div { grid-template-columns: 1fr; gap: var(--u); }
 }
+
+/* =====================================================================
+   Landing page (index.html). Same world, wider sheet: the hero splits
+   copy | phone, and the phone breaks out above the sheet's top edge,
+   as if the sword lunged off the page. That break-out is the signature;
+   everything else stays as quiet as the manual pages.
+   ===================================================================== */
+
+.landing ::selection { background: var(--accent); color: var(--paper-raised); }
+
+.brandbar {
+  max-width: 1080px;
+  margin: 0 auto calc(var(--u) * 6);
+}
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: calc(var(--u) * 3);
+  font-family: var(--pixel);
+  font-size: 28px;
+  line-height: 1;
+  color: #F2EAD9;
+  text-decoration: none;
+}
+.brand img {
+  image-rendering: pixelated;
+  border: 3px solid var(--backdrop-deep);
+  display: block;
+}
+
+.sheet--wide {
+  max-width: 1080px;
+  margin-top: calc(var(--u) * 20);
+  padding: calc(var(--u) * 12) calc(var(--u) * 14) calc(var(--u) * 12);
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: calc(var(--u) * 14);
+  align-items: center;
+}
+
+.hero h1 {
+  font-family: var(--pixel);
+  font-weight: 400;
+  font-size: clamp(56px, 7.4vw, 96px);
+  line-height: 0.88;
+  letter-spacing: -0.01em;
+  margin: 0 0 calc(var(--u) * 6);
+  text-wrap: balance;
+}
+
+.hero-sub {
+  font-size: 21px;
+  line-height: 1.5;
+  max-width: 34ch;
+  color: var(--ink);
+  margin: 0;
+}
+
+/* --- the phone: Apple's iPhone bezel, lifted out through the top of the sheet.
+   The screenshot sits under the bezel in its screen opening, measured from
+   the 1350×2760 bezel: 1206×2622 at (72, 69), corner radius ≈195. --- */
+.hero-shot {
+  position: relative;
+  margin: calc(var(--u) * -32) 0 0;
+  width: 340px;
+  aspect-ratio: 1350 / 2760;
+  filter: drop-shadow(0 18px 28px rgba(15, 13, 11, 0.45));
+  animation: lunge 420ms steps(6, end) both;
+}
+.hero-shot .bezel {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.hero-shot .screen {
+  position: absolute;
+  left: 5.333%;
+  top: 2.5%;
+  width: 89.333%;
+  height: 95%;
+  object-fit: cover;
+  border-radius: 16.2% / 7.45%;
+  image-rendering: pixelated;
+}
+
+/* one move, like the sword's: it slides in chunky steps and stops dead */
+@keyframes lunge {
+  from { transform: translateX(72px); }
+  to   { transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-shot { animation: none; }
+}
+
+/* --- features: a ledger, figure left, rule right, hard rule above --- */
+.features {
+  margin-top: calc(var(--u) * 14);
+  padding-top: calc(var(--u) * 7);
+  border-top: 3px solid var(--ink);
+}
+.features h2 { margin: 0 0 calc(var(--u) * 5); }
+
+.feature-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.feature-list li {
+  display: grid;
+  grid-template-columns: 15rem minmax(0, 62ch);
+  gap: calc(var(--u) * 8);
+  align-items: baseline;
+  padding: calc(var(--u) * 5) 0;
+  margin: 0;
+  border-bottom: 1.5px solid var(--rule);
+}
+.feature-list li:last-child { border-bottom: 0; padding-bottom: 0; }
+.feature-list p { margin: 0; }
+.feature-list .term {
+  font-family: var(--pixel);
+  font-size: 30px;
+  line-height: 1;
+}
+.feature-list .term b {
+  font-weight: 400;
+  font-size: 48px;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+
+/* --- footer: links left, credit right --- */
+.landing footer { max-width: 1080px; }
+.site-foot nav { display: flex; gap: calc(var(--u) * 6); }
+
+@media (max-width: 860px) {
+  .sheet--wide {
+    margin-top: 0;
+    padding: calc(var(--u) * 8) calc(var(--u) * 6) calc(var(--u) * 9);
+  }
+  .hero { grid-template-columns: 1fr; gap: calc(var(--u) * 10); }
+  .hero-shot { margin: 0; width: min(300px, 100%); }
+  .feature-list li { grid-template-columns: 1fr; gap: calc(var(--u) * 2); }
+}
+
+@media (max-width: 560px) {
+  .brandbar { margin-bottom: calc(var(--u) * 4); }
+  .brand { font-size: 24px; }
+  .sheet--wide { padding: calc(var(--u) * 7) calc(var(--u) * 5) calc(var(--u) * 8); }
+  .hero-sub { font-size: 19px; }
+}
